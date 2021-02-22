@@ -1,11 +1,13 @@
-import GlobalStyles from './styles/global';
+import GlobalStyles, { Container } from './styles/global';
+
+import ExperienceBar from './components/ExperienceBar'
 
 function App() {
   return (
     <>
-      <div className="App">
-        Hello World!
-      </div>
+      <Container>
+        <ExperienceBar />
+      </Container>
       <GlobalStyles />
     </>
   );
