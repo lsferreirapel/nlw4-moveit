@@ -1,4 +1,4 @@
-import { Container, Bar } from '../styles/styled-components/StyledExperienceBar';
+import { Container, Bar } from '../styles/components/StyledExperienceBar';
 
 const ExperienceBar: React.FC = () => {
   return (
