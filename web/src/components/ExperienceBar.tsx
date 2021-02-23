@@ -1,5 +1,4 @@
-import React from 'react';
-import { Container, Bar } from './styles';
+import { Container, Bar } from '../styles/styled-components/StyledExperienceBar';
 
 const ExperienceBar: React.FC = () => {
   return (
@@ -7,9 +6,9 @@ const ExperienceBar: React.FC = () => {
       <span>0 xp</span>
       <Bar value={50}>
         <div className="experience"/>
-        <span className="experience-label">400 xp</span>
+        <span className="experience-label">300 xp</span>
       </Bar>
-      <span>800 xp</span>
+      <span>600 xp</span>
 
     </Container>
   );
