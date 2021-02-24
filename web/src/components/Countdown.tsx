@@ -1,9 +1,12 @@
 import { useState, useEffect } from 'react';
-import {CountdownContainer, Timer,  Minutes, Seconds, CountdownButton} from '../styles/components/StyledCountdown';
+import {CountdownContainer, Timer,  Minutes, Seconds, CountdownButton, CountdownButtonActive} from '../styles/components/StyledCountdown';
+
+let countdownTimeout: NodeJS.Timeout;
 
 const Countdown = () => {
-  const [time, setTime] = useState(25 * 60);
+  const [time, setTime] = useState(0.05 * 60);
   const [isActive, setIsActive] = useState(false);
+  const [hasFinished, setHasFinished]= useState(false);
 
   const minutes = Math.floor(time / 60);
   const seconds = time % 60;
@@ -15,11 +18,20 @@ const Countdown = () => {
     setIsActive(true);
   }
 
+  function handleResetCountdown() {
+    clearTimeout(countdownTimeout);
+    setIsActive(false);
+    setTime(25 * 60);
+  }
+
   useEffect(() => {
     if (isActive && time > 0) {
-      setTimeout(() => {
+      countdownTimeout = setTimeout(() => {
         setTime(time - 1);
       }, 1000);
+    } else if(isActive && time === 0) {
+      setHasFinished(true);
+      setIsActive(false);
     }
 
   }, [isActive, time])
@@ -37,10 +49,24 @@ const Countdown = () => {
           <span>{secondRight}</span>
         </Seconds>
       </Timer>
-      <CountdownButton 
-        type="button"
-        onClick={handleStartCountdown}
-      >Iniciar um ciclo</CountdownButton>
+
+      { hasFinished ? (<CountdownButton disabled>Ciclo encerrado</CountdownButton>) : (
+        <>
+          { isActive ? (
+            <CountdownButtonActive 
+              type="button"
+              onClick={handleResetCountdown}
+            >Abandonar ciclo</CountdownButtonActive>
+          ) : (
+            <CountdownButton 
+              type="button"
+              onClick={handleStartCountdown}
+            >Iniciar ciclo</CountdownButton>
+          ) }
+        </>
+      )}
+
+      
     </CountdownContainer>
   );
 }

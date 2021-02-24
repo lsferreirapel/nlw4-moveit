@@ -65,7 +65,23 @@ export const CountdownButton = styled.button`
 
   transition: background-color 0.2s;
 
-  &:hover {
+  &:not(:disabled):hover {
     background: var(--blue-dark);
+  }
+
+  &:disabled {
+    background: var(--white);
+    color: var(--text);
+    cursor: not-allowed;
+  }
+`;
+
+export const CountdownButtonActive = styled(CountdownButton)`
+  background: var(--white);
+  color: var(--title);
+
+  &:not(:disabled):hover {
+    background: var(--red);
+    color: var(--white);
   }
 `;
