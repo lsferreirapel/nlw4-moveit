@@ -3,10 +3,13 @@ import { ChallengesContext } from '../contexts/ChallengesContext';
 import { ChallengeBoxContainer, ChallengeNotActive, ChallengeActive, ChallengeFailedButton, ChallengeSucceededButton } from '../styles/components/StyledChallengeBox';
 
 const ChallengeBox = () => {
-  const { activeChallenge, resetChallenge } = useContext(ChallengesContext);
+  const { activeChallenge, resetChallenge, completeChallenge } = useContext(ChallengesContext);
 
   function handleChallengeFails() {
     resetChallenge();
+  }
+  function handleChallengeSuccess() {
+    completeChallenge();
   }
 
   return (
@@ -24,14 +27,14 @@ const ChallengeBox = () => {
 
             <footer>
               <ChallengeFailedButton type="button" onClick={handleChallengeFails}>Falhei</ChallengeFailedButton>
-              <ChallengeSucceededButton type="button">Completei</ChallengeSucceededButton>
+              <ChallengeSucceededButton type="button" onClick={handleChallengeSuccess}>Completei</ChallengeSucceededButton>
             </footer>
           </ChallengeActive>
         ) : (
           <ChallengeNotActive>
             <strong>Finalize um ciclo para receber um desafio</strong>
             <p>
-              <img src="icons/level-up.svg" alt="Lever Up"/>
+              <img src="icons/level-up.svg" alt="Level Up"/>
               Avance de level completando desafios.
             </p>
           </ChallengeNotActive>
