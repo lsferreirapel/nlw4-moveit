@@ -1,9 +1,12 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useContext } from 'react';
+import { ChallengesContext } from '../contexts/ChallengesContext';
 import {CountdownContainer, Timer,  Minutes, Seconds, CountdownButton, CountdownButtonActive} from '../styles/components/StyledCountdown';
 
 let countdownTimeout: NodeJS.Timeout;
 
 const Countdown = () => {
+  const { startNewChallenge } = useContext(ChallengesContext);
+
   const [time, setTime] = useState(0.05 * 60);
   const [isActive, setIsActive] = useState(false);
   const [hasFinished, setHasFinished]= useState(false);
@@ -32,6 +35,7 @@ const Countdown = () => {
     } else if(isActive && time === 0) {
       setHasFinished(true);
       setIsActive(false);
+      startNewChallenge();
     }
 
   }, [isActive, time])
@@ -53,12 +57,12 @@ const Countdown = () => {
       { hasFinished ? (<CountdownButton disabled>Ciclo encerrado</CountdownButton>) : (
         <>
           { isActive ? (
-            <CountdownButtonActive 
+            <CountdownButtonActive
               type="button"
               onClick={handleResetCountdown}
             >Abandonar ciclo</CountdownButtonActive>
           ) : (
-            <CountdownButton 
+            <CountdownButton
               type="button"
               onClick={handleStartCountdown}
             >Iniciar ciclo</CountdownButton>
@@ -66,7 +70,7 @@ const Countdown = () => {
         </>
       )}
 
-      
+
     </CountdownContainer>
   );
 }
