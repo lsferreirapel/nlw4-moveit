@@ -2,6 +2,8 @@ import { InfoSection } from '../styles/pages/StyledHome';
 
 import Head from 'next/head';
 
+import CountdownProvider from '../contexts/CountdownContext';
+
 import Container from '../styles/global/Container';
 import ExperienceBar from '../components/ExperienceBar';
 import Profile from '../components/Profile';
@@ -17,18 +19,20 @@ export default function Home() {
       </Head>
       <ExperienceBar />
 
-      <InfoSection>
-        <div className="left-container">
-          <Profile />
-          <CompletedChallenges />
-          <Countdown />
-        </div>
+      <CountdownProvider>
+        <InfoSection>
+          <div className="left-container">
+            <Profile />
+            <CompletedChallenges />
+            <Countdown />
+          </div>
 
-        <div className="right-container">
-          <ChallengeBox />
-        </div>
+          <div className="right-container">
+            <ChallengeBox />
+          </div>
 
-      </InfoSection>
+        </InfoSection>
+      </CountdownProvider>
 
     </Container>
   )
