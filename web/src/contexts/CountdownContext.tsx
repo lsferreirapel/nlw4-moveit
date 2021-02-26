@@ -6,8 +6,8 @@ interface CountdownContextData {
   minutes: number,
   isActive: boolean,
   hasFinished: boolean,
-  handleResetCountdown(): void,
-  handleStartCountdown(): void
+  resetCountdown(): void,
+  startCountdown(): void
 }
 
 export const CountdownContext = createContext({} as CountdownContextData)
@@ -27,14 +27,15 @@ const CountdownProvider = ({children}: CountdownProviderProps) => {
   const minutes = Math.floor(time / 60);
   const seconds = time % 60;
 
-  function handleStartCountdown() {
+  function startCountdown() {
     setIsActive(true);
   }
 
-  function handleResetCountdown() {
+  function resetCountdown() {
     clearTimeout(countdownTimeout);
+    setHasFinished(false);
     setIsActive(false);
-    setTime(25 * 60);
+    setTime(0.05 * 60);
   }
 
   useEffect(() => {
@@ -58,8 +59,8 @@ const CountdownProvider = ({children}: CountdownProviderProps) => {
       minutes,
       isActive,
       hasFinished,
-      handleResetCountdown,
-      handleStartCountdown
+      resetCountdown,
+      startCountdown
     }}>
       {children}
     </CountdownContext.Provider>

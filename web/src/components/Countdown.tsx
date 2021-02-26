@@ -14,8 +14,8 @@ const Countdown = () => {
           seconds,
           hasFinished,
           isActive,
-          handleResetCountdown,
-          handleStartCountdown,
+          resetCountdown,
+          startCountdown,
         } = useContext(CountdownContext)
 
 
@@ -42,12 +42,12 @@ const Countdown = () => {
           { isActive ? (
             <CountdownButtonActive
               type="button"
-              onClick={handleResetCountdown}
+              onClick={resetCountdown}
             >Abandonar ciclo</CountdownButtonActive>
           ) : (
             <CountdownButton
               type="button"
-              onClick={handleStartCountdown}
+              onClick={startCountdown}
             >Iniciar ciclo</CountdownButton>
           ) }
         </>
